@@ -1,8 +1,17 @@
+@import url('https://db.onlinewebfonts.com/c/0976a2619014c5855690b7509fab4c6e?family=Helvetica+Now+Display');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 body{
     /* background-color: #FD2C2A; */
+    transition: all c ease;
     background-color: #000000;
+    color:#FFFFFF;
+}
+
+canvas{
+    pointer-events: none;
+}
+.growing{
+    background: #FD2C2A;
 }
