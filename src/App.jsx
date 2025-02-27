@@ -19,8 +19,10 @@ const App = () => {
   useEffect(() => {
     const handleClick = (e) => {
       setShowCanvas((preve) => !preve);
-      console.log(!showCanvas);
       if (!showCanvas) {
+        gsap.set(followRef.current, {
+          background: "#FFFFFF",
+        });
         gsap.set(growingSpanRef.current, {
           left: e.clientX,
           top: e.clientY,
@@ -45,14 +47,19 @@ const App = () => {
             // });
           },
         });
+        gsap.set(click, { color: "#000000" });
       } else {
-        console.log("clicked");
         gsap.to("body", {
           color: "#FFFFFF",
           duration: 0.5,
           backgroundColor: "#000000",
           ease: "power2.inOut",
         });
+        gsap.set(followRef.current, {
+          background: "#FD2C2A",
+        });
+
+        gsap.set(click, { color: "#FFFFFF" });
       }
     };
 
@@ -67,7 +74,7 @@ const App = () => {
   }, [showCanvas]);
   useEffect(() => {
     const locomotiveScroll = new LocomotiveScroll();
-  }, []);
+  }, [showCanvas]);
 
   useEffect(() => {
     if (followRef.current) {
@@ -77,15 +84,22 @@ const App = () => {
         opacity: 1,
         background: "#FD2C2A",
       });
-
+      gsap.set(click, { display: "none" });
       window.addEventListener("mousemove", (e) => {
+        if (e.target === headingRef.current) {
+          gsap.to(followRef.current, { width: 50, height: 50 });
+          gsap.set(click, { display: "block", ease: "Power4.easeOut" });
+        } else {
+          gsap.set(click, { display: "none", ease: "Power4.easeOut" });
+          gsap.to(followRef.current, { width: "1.25rem", height: "1.25rem" });
+        }
         gsap.to(followRef.current, {
           duration: 1,
           overwrite: "auto",
           x: e.clientX,
           y: e.clientY,
           stagger: 0.15,
-          ease: "power3.out",
+          ease: "Power4.easeOut",
         });
       });
     }
@@ -94,8 +108,12 @@ const App = () => {
     <>
       <div
         ref={followRef}
-        className="fixed z-10 rounded-full w-5 h-5 -translate-x-[50%] -translate-y-[50%]"
-      ></div>
+        className="fixed flex items-center justify-center z-10 pointer-events-none rounded-full w-5 h-5 -translate-x-[50%] -translate-y-[50%]"
+      >
+        <span className="font-bold hidden text-white" id="click">
+          Click
+        </span>
+      </div>
       <span
         ref={growingSpanRef}
         className="growing block rounded-full fixed -top-[10%] -left-[10%] w-5 h-5"
