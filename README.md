@@ -1,12 +1,14 @@
-# Path
+# Project Plan
 
-- basic react app
-- tailwind css
-- create app component
-- donload images from thirtysixstudio
-- mack images in an array
-- create canvas component
-- load first 150 images and show im the canvas
-- animate the canvas
-- make canvas daynamic so that it loads 150 images from desired index
-- reuse the canvas component to create a new cancas as many time as needed
+## ✅ Path
+
+- Create a basic React app  
+- Install and configure Tailwind CSS  
+- Create an `App` component  
+- Download images from ThirtySixStudio  
+- Store images in an array  
+- Create a `Canvas` component  
+- Load the first 150 images and display them on the canvas  
+- Animate the canvas  
+- Make the canvas dynamic so it loads 150 images from a specified index  
+- Reuse the `Canvas` component to create new canvases as needed  
